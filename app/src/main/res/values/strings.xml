@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">Pain Au Chocolat</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="manage_contributors">Manage contributors</string>
+
+    <string name="find_a_bringer">WHO\nwill bring them ?</string>
+    <string name="no_bringer_found">There is no contributor registered. Go to the manage contributors screen to add some.</string>
+
+    <string name="validate_bringer">Validate</string>
+    <string name="give_another_bringer">Another one ?</string>
+
+    <string name="add_contributor">Add a new contributor</string>
+
+</resources>

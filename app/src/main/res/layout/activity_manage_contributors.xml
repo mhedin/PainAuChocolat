@@ -1,0 +1,55 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ManageContributorsActivity">
+
+    <ListView
+        android:id="@+id/manage_contributors_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:descendantFocusability="beforeDescendants"
+        android:choiceMode="singleChoice"/>
+
+    <LinearLayout
+        android:padding="@dimen/activity_horizontal_margin"
+        android:id="@+id/manage_contributors_add_layout"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:weightSum="10"
+        android:layout_below="@id/manage_contributors_list"
+        android:visibility="gone">
+
+        <EditText
+            android:id="@+id/manage_contributors_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="8"
+            android:inputType="textCapWords"/>
+
+        <Button
+            android:id="@+id/manage_contributors_validate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="v"/>
+
+        <Button
+            android:id="@+id/manage_contributors_cancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="x"/>
+
+    </LinearLayout>
+
+    <Button
+        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:padding="@dimen/activity_horizontal_margin"
+        android:id="@+id/manage_contributors_add_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:text="@string/add_contributor"/>
+
+</RelativeLayout>
