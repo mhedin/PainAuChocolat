@@ -7,12 +7,10 @@
     android:padding="@dimen/activity_horizontal_margin"
     android:descendantFocusability="beforeDescendants">
 
-    <EditText
-        android:id="@+id/contributor_name"
+    <TextView
+        android:id="@+id/list_header_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="textCapWords|textNoSuggestions"
-        android:background="@android:color/transparent"
-        android:imeOptions="actionDone"/>
+        android:background="@android:color/transparent"/>
 
 </FrameLayout>

@@ -12,10 +12,16 @@ import android.view.View;
 import morgane.fr.painauchocolat.R;
 import morgane.fr.painauchocolat.model.Contributor;
 
-
+/**
+ * This class is the home page of the application. It allows to access the main features
+ * of the application.
+ */
 public class HomeActivity extends Activity {
 
-    public static final String PREFERENCES_MIN_BROUGHT_NUMBER = "minBroughtNumber";
+    /**
+     * A constant corresponding to the minimum session number registered in the preferences.
+     */
+    public static final String PREFERENCES_MIN_SESSION_NUMBER = "minSessionNumber";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,10 +33,10 @@ public class HomeActivity extends Activity {
     protected void onResume() {
         super.onResume();
 
-        // Find the min brought number and register it
-        int minBroughtNumber = Contributor.getMinimumBroughtNumber();
+        // Find the min session number and register it
+        int minSessionNumber = Contributor.getMinimumSessionNumber();
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        preferences.edit().putInt(PREFERENCES_MIN_BROUGHT_NUMBER, minBroughtNumber).commit();
+        preferences.edit().putInt(PREFERENCES_MIN_SESSION_NUMBER, minSessionNumber).commit();
     }
 
     @Override

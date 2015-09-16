@@ -18,16 +18,30 @@ import morgane.fr.painauchocolat.activities.HomeActivity;
 import morgane.fr.painauchocolat.model.Contributor;
 
 /**
+ * This class is the adapter displaying the name of the contributors in a list.
+ *
  * Created by morgane.hedin on 25/08/2015.
  */
 public class ContributorAdapter extends ArrayAdapter<Contributor> {
 
+    /**
+     * The id of the resource used to display the name of the contributor.
+     */
     private int mResource;
 
+    /**
+     * The position of the item currently selected (all the elements of the list are selectable).
+     */
     public int mSelectedPosition = -1;
 
-    private int mMinBroughtNumber;
+    /**
+     * The minimum number of the session, which corresponds to the current session.
+     */
+    private int mMinSessionNumber;
 
+    /**
+     * The holder containing the view used to display the information about the contributors.
+     */
     private static class ViewHolderItem {
         EditText nameTextView;
         FrameLayout frameLayout;
@@ -39,7 +53,7 @@ public class ContributorAdapter extends ArrayAdapter<Contributor> {
         mResource = resource;
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        mMinBroughtNumber = preferences.getInt(HomeActivity.PREFERENCES_MIN_BROUGHT_NUMBER, 0);
+        mMinSessionNumber = preferences.getInt(HomeActivity.PREFERENCES_MIN_SESSION_NUMBER, 0);
     }
 
     @Override
@@ -69,7 +83,7 @@ public class ContributorAdapter extends ArrayAdapter<Contributor> {
         viewHolder.nameTextView.setText(contributor.name);
 
         viewHolder.nameTextView.setTextColor(getContext().getResources().getColor(
-                contributor.broughtNumber > mMinBroughtNumber ? android.R.color.black : android.R.color.holo_green_light));
+                contributor.sessionNumber > mMinSessionNumber ? android.R.color.black : android.R.color.holo_green_light));
 
         if (mSelectedPosition != -1 && position != mSelectedPosition) {
             viewHolder.frameLayout.setForeground(getContext().getDrawable(R.color.transparent_white));

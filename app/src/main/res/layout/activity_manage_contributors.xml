@@ -4,27 +4,37 @@
     tools:context=".ManageContributorsActivity">
 
     <ListView
-        android:id="@+id/manage_contributors_list"
+        android:id="@+id/manage_contributors_not_yet_list"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:descendantFocusability="beforeDescendants"
         android:choiceMode="singleChoice"/>
 
+    <ListView
+        android:id="@+id/manage_contributors_already_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/manage_contributors_not_yet_list"
+        android:descendantFocusability="beforeDescendants"
+        android:choiceMode="singleChoice"/>
+
     <LinearLayout
-        android:padding="@dimen/activity_horizontal_margin"
+        android:paddingLeft="@dimen/activity_horizontal_margin"
+        android:paddingRight="@dimen/activity_horizontal_margin"
         android:id="@+id/manage_contributors_add_layout"
         android:orientation="horizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:weightSum="10"
-        android:layout_below="@id/manage_contributors_list"
+        android:layout_below="@id/manage_contributors_already_list"
         android:visibility="gone">
 
         <EditText
             android:id="@+id/manage_contributors_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="8"
+            android:layout_weight="9"
+            android:background="@android:color/transparent"
             android:inputType="textCapWords"/>
 
         <Button
@@ -32,14 +42,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="v"/>
-
-        <Button
-            android:id="@+id/manage_contributors_cancel"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="x"/>
+            android:background="@android:color/transparent"
+            android:textSize="@dimen/plus_text_size"
+            android:gravity="bottom"
+            android:padding="0dp"
+            android:text="+"/>
 
     </LinearLayout>
 

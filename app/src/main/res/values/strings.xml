@@ -11,5 +11,8 @@
     <string name="give_another_bringer">Another one ?</string>
 
     <string name="add_contributor">Add a new contributor</string>
+    <string name="contributors_not_yet">They haven\'t brought yet</string>
+    <string name="contributors_already">They have already brought</string>
+    <string name="contirbutors_nobody">Nobody has brought this session</string>
 
 </resources>
