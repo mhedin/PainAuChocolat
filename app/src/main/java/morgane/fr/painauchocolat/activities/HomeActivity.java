@@ -42,14 +42,22 @@ public class HomeActivity extends Activity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        Intent intent = null;
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            Intent intent = new Intent(this, SettingsActivity.class);
+        switch (item.getItemId()) {
+            case R.id.action_bakery:
+                //TODO
+
+            case R.id.action_contributors:
+                intent = new Intent(this, ManageContributorsActivity.class);
+                break;
+
+            case R.id.action_settings :
+                intent = new Intent(this, SettingsActivity.class);
+                break;
+        }
+
+        if (intent != null) {
             startActivity(intent);
             return true;
         }
@@ -59,11 +67,6 @@ public class HomeActivity extends Activity {
 
     public void findABringer(View view) {
         Intent intent = new Intent(this, BringerActivity.class);
-        startActivity(intent);
-    }
-
-    public void manageContributors(View view) {
-        Intent intent = new Intent(this, ManageContributorsActivity.class);
         startActivity(intent);
     }
 }

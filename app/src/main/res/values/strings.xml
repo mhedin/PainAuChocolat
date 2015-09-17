@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">Pain Au Chocolat</string>
 
-    <string name="action_settings">Settings</string>
+    <string name="action_bakery">I need a bakery</string>
+    <string name="action_settings">Choose the breakfast day</string>
+    <string name="action_contributors">Manage the contributors</string>
+
     <string name="manage_contributors">Manage contributors</string>
 
     <string name="find_a_bringer">WHO\nwill bring them ?</string>
@@ -12,4 +15,16 @@
 
     <string name="add_contributor">Add a new contributor</string>
 
+    <string name="settings_choose_day">Choose the Breakfast Day and a reminder will be sent the day before for you to choose the bringer, or choose none to be free of having breakfast the day you want to :</string>
+
+    <string-array name="settings_days">
+        <item>None</item>
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+        <item>Sunday</item>
+    </string-array>
 </resources>
