@@ -10,14 +10,27 @@ import android.widget.TextView;
 import morgane.fr.painauchocolat.R;
 import morgane.fr.painauchocolat.model.Contributor;
 
-
+/**
+ * This class displays the person who will bring the breakfast the day after. The user can accept
+ * the random choice of person or ask for another one who hasn't bring the breakfast in this session
+ * yet.
+ */
 public class BringerActivity extends Activity {
 
+    /**
+     * This contributor selected to be the bringer.
+     */
     private Contributor mBringer;
 
+    /**
+     * The field in which the name of the contributor selected is displayed.
+     */
     private TextView mBringerTextView;
 
-    private int mMinBroughtNumber;
+    /**
+     * The minimum number of the session, which corresponds to the current session so the onein which contributor must be searched.
+     */
+    private int mMinSessionNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,9 +38,9 @@ public class BringerActivity extends Activity {
         setContentView(R.layout.activity_bringer);
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        mMinBroughtNumber = preferences.getInt(HomeActivity.PREFERENCES_MIN_BROUGHT_NUMBER, 0);
+        mMinSessionNumber = preferences.getInt(HomeActivity.PREFERENCES_MIN_SESSION_NUMBER, 0);
 
-        mBringer = Contributor.getRandomBringer(mMinBroughtNumber);
+        mBringer = Contributor.getRandomBringer(mMinSessionNumber);
 
         mBringerTextView = (TextView) findViewById(R.id.bringer_name);
         if (mBringer != null) {
@@ -40,13 +53,13 @@ public class BringerActivity extends Activity {
     }
 
     public void validateBringer(View view) {
-        mBringer.broughtNumber = mMinBroughtNumber + 1;
+        mBringer.sessionNumber = mMinSessionNumber + 1;
         mBringer.save();
         finish();
     }
 
     public void findAnotherBringer(View view) {
-        mBringer = Contributor.getRandomBringer(mMinBroughtNumber);
+        mBringer = Contributor.getRandomBringer(mMinSessionNumber);
         mBringerTextView.setText(mBringer.name);
     }
 }
