@@ -1,4 +1,4 @@
-package morgane.fr.painauchocolat;
+package com.morgane.painauchocolat;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

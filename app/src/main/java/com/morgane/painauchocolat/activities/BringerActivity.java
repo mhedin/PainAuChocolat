@@ -1,4 +1,4 @@
-package morgane.fr.painauchocolat.activities;
+package com.morgane.painauchocolat.activities;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
@@ -7,8 +7,8 @@ import android.preference.PreferenceManager;
 import android.view.View;
 import android.widget.TextView;
 
-import morgane.fr.painauchocolat.R;
-import morgane.fr.painauchocolat.model.Contributor;
+import com.morgane.painauchocolat.R;
+import com.morgane.painauchocolat.model.Contributor;
 
 /**
  * This class displays the person who will bring the breakfast the day after. The user can accept

@@ -1,11 +1,10 @@
-package morgane.fr.painauchocolat.activities;
+package com.morgane.painauchocolat.activities;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -13,9 +12,9 @@ import android.widget.TextView;
 
 import java.util.List;
 
-import morgane.fr.painauchocolat.R;
-import morgane.fr.painauchocolat.adapters.ContributorAdapter;
-import morgane.fr.painauchocolat.model.Contributor;
+import com.morgane.painauchocolat.R;
+import com.morgane.painauchocolat.adapters.ContributorAdapter;
+import com.morgane.painauchocolat.model.Contributor;
 
 /**
  * This class allows the user to manage the contributors of the Breakfast Day. He can create

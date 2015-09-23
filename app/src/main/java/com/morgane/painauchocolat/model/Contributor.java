@@ -1,4 +1,4 @@
-package morgane.fr.painauchocolat.model;
+package com.morgane.painauchocolat.model;
 
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;

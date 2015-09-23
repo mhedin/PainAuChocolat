@@ -1,4 +1,4 @@
-package morgane.fr.painauchocolat.utils;
+package com.morgane.painauchocolat.utils;
 
 /**
  * Class containing the constants necessary in the whole application.

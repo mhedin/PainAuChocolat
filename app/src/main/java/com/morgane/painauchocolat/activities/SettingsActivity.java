@@ -1,4 +1,4 @@
-package morgane.fr.painauchocolat.activities;
+package com.morgane.painauchocolat.activities;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
@@ -9,10 +9,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
-import java.util.prefs.PreferenceChangeEvent;
-
-import morgane.fr.painauchocolat.R;
-import morgane.fr.painauchocolat.utils.Constant;
+import com.morgane.painauchocolat.R;
+import com.morgane.painauchocolat.utils.Constant;
 
 /**
  * This activity allows the user to choose the Breakfast Day. If a day is selected,

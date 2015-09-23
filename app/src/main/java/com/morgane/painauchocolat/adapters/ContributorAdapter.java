@@ -1,4 +1,4 @@
-package morgane.fr.painauchocolat.adapters;
+package com.morgane.painauchocolat.adapters;
 
 import android.app.Activity;
 import android.content.Context;
@@ -13,9 +13,9 @@ import android.widget.FrameLayout;
 
 import java.util.List;
 
-import morgane.fr.painauchocolat.R;
-import morgane.fr.painauchocolat.activities.HomeActivity;
-import morgane.fr.painauchocolat.model.Contributor;
+import com.morgane.painauchocolat.R;
+import com.morgane.painauchocolat.activities.HomeActivity;
+import com.morgane.painauchocolat.model.Contributor;
 
 /**
  * This class is the adapter displaying the name of the contributors in a list.

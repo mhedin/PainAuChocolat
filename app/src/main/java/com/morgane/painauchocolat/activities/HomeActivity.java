@@ -1,4 +1,4 @@
-package morgane.fr.painauchocolat.activities;
+package com.morgane.painauchocolat.activities;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,8 +9,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import morgane.fr.painauchocolat.R;
-import morgane.fr.painauchocolat.model.Contributor;
+import com.morgane.painauchocolat.R;
+import com.morgane.painauchocolat.model.Contributor;
 
 /**
  * This class is the home page of the application. It allows to access the main features
