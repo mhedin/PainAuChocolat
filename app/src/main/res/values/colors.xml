@@ -2,5 +2,6 @@
 <resources>
 
     <item name="transparent_white" type="color">#80FFFFFF</item>
+    <item name="green" type="color">#00FFCC</item>
 
 </resources>

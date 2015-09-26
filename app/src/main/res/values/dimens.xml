@@ -6,4 +6,8 @@
     <dimen name="default_margin_between_elements">10dp</dimen>
 
     <dimen name="plus_text_size">40sp</dimen>
+
+    <dimen name="bringer_button_text_size">23sp</dimen>
+    <dimen name="bringer_mark_text_size">120sp</dimen>
+
 </resources>

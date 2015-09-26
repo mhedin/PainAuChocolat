@@ -8,6 +8,7 @@ import android.preference.PreferenceManager;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.RelativeLayout;
 
 import com.morgane.painauchocolat.R;
 import com.morgane.painauchocolat.model.Contributor;
@@ -16,7 +17,7 @@ import com.morgane.painauchocolat.model.Contributor;
  * This class is the home page of the application. It allows to access the main features
  * of the application.
  */
-public class HomeActivity extends Activity {
+public class HomeActivity extends Activity implements View.OnClickListener {
 
     /**
      * A constant corresponding to the minimum session number registered in the preferences.
@@ -27,6 +28,9 @@ public class HomeActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        RelativeLayout buttonLayout = (RelativeLayout) findViewById(R.id.home_bringer_button);
+        buttonLayout.setOnClickListener(this);
     }
 
     @Override
@@ -72,8 +76,11 @@ public class HomeActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void findABringer(View view) {
-        Intent intent = new Intent(this, BringerActivity.class);
-        startActivity(intent);
+    @Override
+    public void onClick(View v) {
+        if (v.getId() == R.id.home_bringer_button) {
+            Intent intent = new Intent(this, BringerActivity.class);
+            startActivity(intent);
+        }
     }
 }
