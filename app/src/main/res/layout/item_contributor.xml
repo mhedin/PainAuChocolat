@@ -1,18 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/contributor_frame_layout"
-    android:orientation="horizontal"
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/contributor_name"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="@dimen/activity_horizontal_margin"
-    android:descendantFocusability="beforeDescendants">
-
-    <EditText
-        android:id="@+id/contributor_name"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textCapWords|textNoSuggestions"
-        android:background="@android:color/transparent"
-        android:imeOptions="actionDone"/>
-
-</FrameLayout>
+    android:layout_height="wrap_content"
+    android:padding="30dp"
+    android:background="@android:color/transparent"/>

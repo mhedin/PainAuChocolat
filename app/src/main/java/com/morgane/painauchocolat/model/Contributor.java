@@ -1,5 +1,8 @@
 package com.morgane.painauchocolat.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.activeandroid.Model;
 import com.activeandroid.annotation.Column;
 import com.activeandroid.annotation.Table;
@@ -14,7 +17,7 @@ import java.util.List;
  * Created by morgane.hedin on 25/08/2015.
  */
 @Table(name = "Contributors")
-public class Contributor extends Model {
+public class Contributor extends Model implements Parcelable {
 
     @Column(name = "Name")
     public String name;
@@ -29,6 +32,11 @@ public class Contributor extends Model {
     public Contributor(String _name) {
         name = _name;
         sessionNumber = 0;
+    }
+
+    public Contributor(Parcel in){
+        this.name = in.readString();
+        this.sessionNumber = in.readInt();
     }
 
     /**
@@ -71,6 +79,18 @@ public class Contributor extends Model {
     }
 
     /**
+     * Method to know if there is contributor registered in the application, or if
+     * the application has never been used yet.
+     * @return True if there is contributor in the database, false otherwise.
+     */
+    public static boolean isThereContributors() {
+        return new Select()
+                .from(Contributor.class)
+                .execute()
+                .size() > 0;
+    }
+
+    /**
      * Get the number of the current session, which corresponds to the minimum session number.
      * @return The number of the current session.
      */
@@ -82,4 +102,25 @@ public class Contributor extends Model {
 
         return contributor != null ? contributor.sessionNumber : 0;
     }
+
+    @Override
+    public int describeContents(){
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.name);
+        dest.writeInt(this.sessionNumber);
+    }
+
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public Contributor createFromParcel(Parcel in) {
+            return new Contributor(in);
+        }
+
+        public Contributor[] newArray(int size) {
+            return new Contributor[size];
+        }
+    };
 }

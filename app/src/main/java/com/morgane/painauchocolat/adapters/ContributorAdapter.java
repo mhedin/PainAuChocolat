@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -30,30 +31,16 @@ public class ContributorAdapter extends ArrayAdapter<Contributor> {
     private int mResource;
 
     /**
-     * The position of the item currently selected (all the elements of the list are selectable).
-     */
-    public int mSelectedPosition = -1;
-
-    /**
-     * The minimum number of the session, which corresponds to the current session.
-     */
-    private int mMinSessionNumber;
-
-    /**
      * The holder containing the view used to display the information about the contributors.
      */
     private static class ViewHolderItem {
-        EditText nameTextView;
-        FrameLayout frameLayout;
+        TextView nameTextView;
     }
 
     public ContributorAdapter(Context context, int resource, List<Contributor> objects) {
         super(context, resource, objects);
 
         mResource = resource;
-
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(context);
-        mMinSessionNumber = preferences.getInt(HomeActivity.PREFERENCES_MIN_SESSION_NUMBER, 0);
     }
 
     @Override
@@ -66,8 +53,7 @@ public class ContributorAdapter extends ArrayAdapter<Contributor> {
 
             // well set up the ViewHolder
             viewHolder = new ViewHolderItem();
-            viewHolder.nameTextView = (EditText) convertView.findViewById(R.id.contributor_name);
-            viewHolder.frameLayout = (FrameLayout) convertView.findViewById(R.id.contributor_frame_layout);
+            viewHolder.nameTextView = (TextView) convertView.findViewById(R.id.contributor_name);
 
             // store the holder with the view.
             convertView.setTag(viewHolder);
@@ -81,45 +67,6 @@ public class ContributorAdapter extends ArrayAdapter<Contributor> {
         final Contributor contributor = getItem(position);
 
         viewHolder.nameTextView.setText(contributor.name);
-
-        if (mSelectedPosition != -1 && position != mSelectedPosition) {
-            viewHolder.frameLayout.setForeground(getContext().getDrawable(R.color.transparent_white));
-        } else {
-            viewHolder.frameLayout.setForeground(getContext().getDrawable(android.R.color.transparent));
-        }
-
-        viewHolder.nameTextView.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean hasFocus) {
-                if (hasFocus && mSelectedPosition != position) {
-                    mSelectedPosition = position;
-                    notifyDataSetChanged();
-                }
-                else if (!hasFocus
-                        && viewHolder.nameTextView.getText() != null
-                        && viewHolder.nameTextView.getText().length() > 0
-                        && !viewHolder.nameTextView.getText().toString().equals(contributor.name)) {
-                    contributor.name = viewHolder.nameTextView.getText().toString();
-                    contributor.save();
-                }
-            }
-        });
-
-        //we need to update adapter once we finish with editing
-//        viewHolder.nameTextView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-//            @Override
-//            public boolean onEditorAction(TextView textView, int actionId, KeyEvent keyEvent) {
-//                if (actionId == EditorInfo.IME_ACTION_DONE
-//                        && viewHolder.nameTextView.getText() != null
-//                        && viewHolder.nameTextView.getText().length() > 0) {
-//                    contributor.name = viewHolder.nameTextView.getText().toString();
-//                    contributor.save();
-//                    return true;
-//                }
-//                textView.clearFocus();
-//                return false;
-//            }
-//        });
 
         return convertView;
     }

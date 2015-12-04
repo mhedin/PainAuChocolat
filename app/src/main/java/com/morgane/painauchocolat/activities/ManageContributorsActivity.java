@@ -1,10 +1,15 @@
 package com.morgane.painauchocolat.activities;
 
-import android.app.Activity;
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -14,6 +19,7 @@ import java.util.List;
 
 import com.morgane.painauchocolat.R;
 import com.morgane.painauchocolat.adapters.ContributorAdapter;
+import com.morgane.painauchocolat.fragments.EditContributorFragment;
 import com.morgane.painauchocolat.model.Contributor;
 
 /**
@@ -22,7 +28,7 @@ import com.morgane.painauchocolat.model.Contributor;
  * The user has also the visibility on the contributors who have already brought the breakfast
  * in this session, and the ones who haven't yet.
  */
-public class ManageContributorsActivity extends Activity implements View.OnClickListener {
+public class ManageContributorsActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
 
     /**
      * The adapter of the list of the contributors who haven't bring
@@ -40,12 +46,35 @@ public class ManageContributorsActivity extends Activity implements View.OnClick
      */
     private EditText mNewContributorName;
 
+    /**
+     * The list view which displays the list of the contributors who have already
+     * brought the breakfast.
+     */
+    private ListView mContributorsAlreadyListView;
+
+    /**
+     * The list view which displays the list of the contributors who haven't
+     * brought the breakfast yet.
+     */
+    private ListView mContributorsNotYetListView;
+
+    /**
+     * The text view which indicates how to add a contributor if there is none.
+     */
+    private TextView mNoContributorAlert;
+
+    /**
+     * The button used to add a new contributor.
+     */
+    private FloatingActionButton mAddButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manage_contributors);
 
-        findViewById(R.id.manage_contributors_add_button).setOnClickListener(this);
+        mAddButton = (FloatingActionButton) findViewById(R.id.manage_contributors_add_button);
+        mAddButton.setOnClickListener(this);
         findViewById(R.id.manage_contributors_validate).setOnClickListener(this);
 
         mAddContributorLayout = (LinearLayout) findViewById(R.id.manage_contributors_add_layout);
@@ -56,8 +85,8 @@ public class ManageContributorsActivity extends Activity implements View.OnClick
         int sessionNumber = preferences.getInt(HomeActivity.PREFERENCES_MIN_SESSION_NUMBER, 0);
 
         // Create the list of the contributors who haven't brought yet
-        final ListView contributorNotYetList = (ListView) findViewById(R.id.manage_contributors_not_yet_list);
-        contributorNotYetList.setItemsCanFocus(true);
+        mContributorsNotYetListView = (ListView) findViewById(R.id.manage_contributors_not_yet_list);
+        mContributorsNotYetListView.setItemsCanFocus(true);
 
         List<Contributor> contributorsNotYet = Contributor.getNotYetContributors(sessionNumber);
         mContributorsNotYetAdapter = new ContributorAdapter(this, R.layout.item_contributor, contributorsNotYet);
@@ -65,13 +94,13 @@ public class ManageContributorsActivity extends Activity implements View.OnClick
         View headerNotYet = getLayoutInflater().inflate(R.layout.item_list_header, null, false);
         TextView headerNotYetTitle = (TextView) headerNotYet.findViewById(R.id.list_header_title);
         headerNotYetTitle.setText(getString(R.string.contributors_not_yet));
-        contributorNotYetList.addHeaderView(headerNotYet);
+        mContributorsNotYetListView.addHeaderView(headerNotYet);
 
-        contributorNotYetList.setAdapter(mContributorsNotYetAdapter);
+        mContributorsNotYetListView.setAdapter(mContributorsNotYetAdapter);
 
         // Create the list of the contributors who have already brought
-        final ListView contributorAlreadyList = (ListView) findViewById(R.id.manage_contributors_already_list);
-        contributorAlreadyList.setItemsCanFocus(true);
+        mContributorsAlreadyListView = (ListView) findViewById(R.id.manage_contributors_already_list);
+        mContributorsAlreadyListView.setItemsCanFocus(true);
 
         List<Contributor> contributorsAlready = Contributor.getAlreadyContributors(sessionNumber);
         ContributorAdapter contributorsAlreadyAdapter = new ContributorAdapter(this, R.layout.item_contributor, contributorsAlready);
@@ -79,9 +108,20 @@ public class ManageContributorsActivity extends Activity implements View.OnClick
         View headerAlready = getLayoutInflater().inflate(R.layout.item_list_header, null, false);
         TextView headerAlreadyTitle = (TextView) headerAlready.findViewById(R.id.list_header_title);
         headerAlreadyTitle.setText(getString(R.string.contributors_already));
-        contributorAlreadyList.addHeaderView(headerAlready);
+        mContributorsAlreadyListView.addHeaderView(headerAlready);
 
-        contributorAlreadyList.setAdapter(contributorsAlreadyAdapter);
+        mContributorsAlreadyListView.setAdapter(contributorsAlreadyAdapter);
+
+        mNoContributorAlert = (TextView) findViewById(R.id.manage_contributors_none_alert);
+
+        mContributorsNotYetListView.setOnItemClickListener(this);
+
+        // If there is no contributor registered, display the help message
+        if (contributorsNotYet.size() == 0 && contributorsAlready.size() == 0) {
+            mContributorsNotYetListView.setVisibility(View.GONE);
+            mContributorsAlreadyListView.setVisibility(View.GONE);
+            mNoContributorAlert.setVisibility(View.VISIBLE);
+        }
     }
 
     @Override
@@ -96,6 +136,13 @@ public class ManageContributorsActivity extends Activity implements View.OnClick
                 if (mNewContributorName.getText() != null && mNewContributorName.getText().length() > 0) {
                     Contributor contributor = new Contributor(mNewContributorName.getText().toString());
                     contributor.save();
+
+                    if (mContributorsNotYetAdapter.getCount() == 0) {
+                        mContributorsNotYetListView.setVisibility(View.VISIBLE);
+                        mContributorsAlreadyListView.setVisibility(View.VISIBLE);
+                        mNoContributorAlert.setVisibility(View.GONE);
+                    }
+
                     mContributorsNotYetAdapter.add(contributor);
                     mContributorsNotYetAdapter.notifyDataSetChanged();
 
@@ -105,5 +152,27 @@ public class ManageContributorsActivity extends Activity implements View.OnClick
                 break;
 
         }
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+        // We don't want to include the title in the item click
+        if (id != -1) {
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.manage_contributors_fragment,
+                            EditContributorFragment.newInstance(view.getTop(), mContributorsNotYetAdapter.getItem(position - 1)),
+                            "edit_contributor")
+                    .commit();
+            mAddButton.setVisibility(View.GONE);
+        }
+    }
+
+    public void closeFragment(Fragment fragment) {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+
+        getSupportFragmentManager().beginTransaction().remove(fragment).commit();
+        mAddButton.setVisibility(View.VISIBLE);
+        mContributorsNotYetAdapter.notifyDataSetChanged();
     }
 }

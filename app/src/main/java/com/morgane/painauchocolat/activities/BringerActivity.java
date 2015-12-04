@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.TextView;
 
@@ -15,7 +16,7 @@ import com.morgane.painauchocolat.model.Contributor;
  * the random choice of person or ask for another one who hasn't bring the breakfast in this session
  * yet.
  */
-public class BringerActivity extends Activity {
+public class BringerActivity extends AppCompatActivity {
 
     /**
      * This contributor selected to be the bringer.
@@ -45,10 +46,6 @@ public class BringerActivity extends Activity {
         mBringerTextView = (TextView) findViewById(R.id.bringer_name);
         if (mBringer != null) {
             mBringerTextView.setText(mBringer.name);
-        } else {
-            mBringerTextView.setText(getString(R.string.no_bringer_found));
-            findViewById(R.id.bringer_validate).setVisibility(View.GONE);
-            findViewById(R.id.bringer_another).setVisibility(View.GONE);
         }
     }
 
