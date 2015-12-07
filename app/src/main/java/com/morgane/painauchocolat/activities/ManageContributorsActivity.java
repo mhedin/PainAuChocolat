@@ -1,9 +1,8 @@
 package com.morgane.painauchocolat.activities;
 
 import android.content.Context;
-import android.content.SharedPreferences;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
-import android.preference.PreferenceManager;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
@@ -28,35 +27,19 @@ import com.morgane.painauchocolat.model.Contributor;
  * The user has also the visibility on the contributors who have already brought the breakfast
  * in this session, and the ones who haven't yet.
  */
-public class ManageContributorsActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemClickListener {
+public class ManageContributorsActivity extends AppCompatActivity implements View.OnClickListener {
 
     /**
      * The adapter of the list of the contributors who haven't bring
      * the breakfast yet.
      */
-    private ContributorAdapter mContributorsNotYetAdapter;
-
-    /**
-     * The layout containing the button to add a new contributor.
-     */
-    private LinearLayout mAddContributorLayout;
-
-    /**
-     * The editable field in which the user can add the name of a contributor.
-     */
-    private EditText mNewContributorName;
-
-    /**
-     * The list view which displays the list of the contributors who have already
-     * brought the breakfast.
-     */
-    private ListView mContributorsAlreadyListView;
+    private ContributorAdapter mContributorsAdapter;
 
     /**
      * The list view which displays the list of the contributors who haven't
      * brought the breakfast yet.
      */
-    private ListView mContributorsNotYetListView;
+    private ListView mContributorsListView;
 
     /**
      * The text view which indicates how to add a contributor if there is none.
@@ -75,51 +58,21 @@ public class ManageContributorsActivity extends AppCompatActivity implements Vie
 
         mAddButton = (FloatingActionButton) findViewById(R.id.manage_contributors_add_button);
         mAddButton.setOnClickListener(this);
-        findViewById(R.id.manage_contributors_validate).setOnClickListener(this);
 
-        mAddContributorLayout = (LinearLayout) findViewById(R.id.manage_contributors_add_layout);
-        mNewContributorName = (EditText) findViewById(R.id.manage_contributors_name);
+        // Create the list of the contributors
+        mContributorsListView = (ListView) findViewById(R.id.manage_contributors_list);
+        mContributorsListView.setItemsCanFocus(true);
 
-        // Get the brought number
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        int sessionNumber = preferences.getInt(HomeActivity.PREFERENCES_MIN_SESSION_NUMBER, 0);
+        List<Contributor> contributors = Contributor.getContributors();
+        mContributorsAdapter = new ContributorAdapter(this, R.layout.item_contributor, contributors);
 
-        // Create the list of the contributors who haven't brought yet
-        mContributorsNotYetListView = (ListView) findViewById(R.id.manage_contributors_not_yet_list);
-        mContributorsNotYetListView.setItemsCanFocus(true);
-
-        List<Contributor> contributorsNotYet = Contributor.getNotYetContributors(sessionNumber);
-        mContributorsNotYetAdapter = new ContributorAdapter(this, R.layout.item_contributor, contributorsNotYet);
-
-        View headerNotYet = getLayoutInflater().inflate(R.layout.item_list_header, null, false);
-        TextView headerNotYetTitle = (TextView) headerNotYet.findViewById(R.id.list_header_title);
-        headerNotYetTitle.setText(getString(R.string.contributors_not_yet));
-        mContributorsNotYetListView.addHeaderView(headerNotYet);
-
-        mContributorsNotYetListView.setAdapter(mContributorsNotYetAdapter);
-
-        // Create the list of the contributors who have already brought
-        mContributorsAlreadyListView = (ListView) findViewById(R.id.manage_contributors_already_list);
-        mContributorsAlreadyListView.setItemsCanFocus(true);
-
-        List<Contributor> contributorsAlready = Contributor.getAlreadyContributors(sessionNumber);
-        ContributorAdapter contributorsAlreadyAdapter = new ContributorAdapter(this, R.layout.item_contributor, contributorsAlready);
-
-        View headerAlready = getLayoutInflater().inflate(R.layout.item_list_header, null, false);
-        TextView headerAlreadyTitle = (TextView) headerAlready.findViewById(R.id.list_header_title);
-        headerAlreadyTitle.setText(getString(R.string.contributors_already));
-        mContributorsAlreadyListView.addHeaderView(headerAlready);
-
-        mContributorsAlreadyListView.setAdapter(contributorsAlreadyAdapter);
+        mContributorsListView.setAdapter(mContributorsAdapter);
 
         mNoContributorAlert = (TextView) findViewById(R.id.manage_contributors_none_alert);
 
-        mContributorsNotYetListView.setOnItemClickListener(this);
-
         // If there is no contributor registered, display the help message
-        if (contributorsNotYet.size() == 0 && contributorsAlready.size() == 0) {
-            mContributorsNotYetListView.setVisibility(View.GONE);
-            mContributorsAlreadyListView.setVisibility(View.GONE);
+        if (contributors.size() == 0) {
+            mContributorsListView.setVisibility(View.GONE);
             mNoContributorAlert.setVisibility(View.VISIBLE);
         }
     }
@@ -128,51 +81,69 @@ public class ManageContributorsActivity extends AppCompatActivity implements Vie
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.manage_contributors_add_button:
-                mAddContributorLayout.setVisibility(View.VISIBLE);
-                mNewContributorName.requestFocus();
+                final View headerView = getLayoutInflater().inflate(R.layout.header_add_contributor, null);
+                mContributorsListView.addHeaderView(headerView);
+
+                BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
+                bitmapOptions.inJustDecodeBounds = true;
+                BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher, bitmapOptions);
+                LinearLayout headerLayout = (LinearLayout) headerView.findViewById(R.id.add_contributor_layout);
+                headerLayout.setPadding(bitmapOptions.outWidth,
+                        headerLayout.getPaddingTop(),
+                        headerLayout.getPaddingRight(),
+                        headerLayout.getPaddingBottom());
+
+                EditText headerEdit = (EditText) headerView.findViewById(R.id.add_contributor_name);
+                headerEdit.requestFocus();
+                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
+
+                headerView.findViewById(R.id.add_contributor_validate).setOnClickListener(this);
+
+                mAddButton.setVisibility(View.GONE);
                 break;
 
-            case R.id.manage_contributors_validate:
-                if (mNewContributorName.getText() != null && mNewContributorName.getText().length() > 0) {
-                    Contributor contributor = new Contributor(mNewContributorName.getText().toString());
+            case R.id.add_contributor_validate:
+                EditText newContributorName = (EditText) findViewById(R.id.add_contributor_name);
+                if (newContributorName.getText() != null && newContributorName.getText().length() > 0) {
+                    Contributor contributor = new Contributor(newContributorName.getText().toString());
                     contributor.save();
 
-                    if (mContributorsNotYetAdapter.getCount() == 0) {
-                        mContributorsNotYetListView.setVisibility(View.VISIBLE);
-                        mContributorsAlreadyListView.setVisibility(View.VISIBLE);
+                    if (mContributorsAdapter.getCount() == 0) {
+                        mContributorsListView.setVisibility(View.VISIBLE);
                         mNoContributorAlert.setVisibility(View.GONE);
                     }
 
-                    mContributorsNotYetAdapter.add(contributor);
-                    mContributorsNotYetAdapter.notifyDataSetChanged();
+                    mContributorsAdapter.add(contributor);
+                    mContributorsAdapter.notifyDataSetChanged();
 
-                    mAddContributorLayout.setVisibility(View.GONE);
-                    mNewContributorName.setText(null);
+                    mContributorsListView.removeHeaderView(findViewById(R.id.add_contributor_layout));
+                    mAddButton.setVisibility(View.VISIBLE);
                 }
                 break;
-
         }
     }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-        // We don't want to include the title in the item click
-        if (id != -1) {
-            getSupportFragmentManager().beginTransaction()
-                    .add(R.id.manage_contributors_fragment,
-                            EditContributorFragment.newInstance(view.getTop(), mContributorsNotYetAdapter.getItem(position - 1)),
-                            "edit_contributor")
-                    .commit();
-            mAddButton.setVisibility(View.GONE);
-        }
+    /**
+     * Launch the edition of the selected contributor
+     * @param position The position of the contributor in the list.
+     */
+    public void editContributor(int position) {
+        getSupportFragmentManager().beginTransaction()
+                .add(R.id.manage_contributors_fragment,
+                        EditContributorFragment.newInstance(mContributorsListView.getChildAt(position).getTop(),
+                                mContributorsAdapter.getItem(position)),
+                        "edit_contributor")
+                .commit();
+        mAddButton.setVisibility(View.GONE);
     }
 
     public void closeFragment(Fragment fragment) {
         InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
 
         getSupportFragmentManager().beginTransaction().remove(fragment).commit();
         mAddButton.setVisibility(View.VISIBLE);
-        mContributorsNotYetAdapter.notifyDataSetChanged();
+        mContributorsAdapter.notifyDataSetChanged();
     }
 }

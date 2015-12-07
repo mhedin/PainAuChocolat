@@ -17,6 +17,7 @@
     <string name="contributors_not_yet">They haven\'t brought yet</string>
     <string name="contributors_already">They have already brought</string>
     <string name="contirbutors_nobody">Nobody has brought this session</string>
+    <string name="contributor_delete">Deleted</string>
 
     <string name="settings_choose_day">Choose the Breakfast Day and a reminder will be sent the day before for you to choose the bringer, or choose none to be free of having breakfast the day you want to :</string>
 

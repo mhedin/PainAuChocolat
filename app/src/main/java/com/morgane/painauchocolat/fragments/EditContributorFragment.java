@@ -1,6 +1,7 @@
 package com.morgane.painauchocolat.fragments;
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.KeyEvent;
@@ -64,6 +65,14 @@ public class EditContributorFragment extends Fragment implements View.OnClickLis
         mNameEditText = (EditText) view.findViewById(R.id.edit_contributor_name);
         mNameEditText.setText(mContributor.name);
         mNameEditText.setOnEditorActionListener(this);
+
+        BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
+        bitmapOptions.inJustDecodeBounds = true;
+        BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher, bitmapOptions);
+        mNameEditText.setPadding(bitmapOptions.outWidth,
+                mNameEditText.getPaddingTop(),
+                mNameEditText.getPaddingRight(),
+                mNameEditText.getPaddingBottom());
 
         FrameLayout.LayoutParams nameLayoutParams =
                 (FrameLayout.LayoutParams) mNameEditText.getLayoutParams();

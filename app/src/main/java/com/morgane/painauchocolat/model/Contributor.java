@@ -40,27 +40,12 @@ public class Contributor extends Model implements Parcelable {
     }
 
     /**
-     * Get the list of the contributors who haven't bring the breakfast in this session.
-     * @param sessionNumber The number of the current session.
-     * @return The list of the contributors who haven't bring the breakfast in this session yet.
+     * Get the list of all the contributors.
+     * @return The list of the contributors.
      */
-    public static List<Contributor> getNotYetContributors(int sessionNumber) {
+    public static List<Contributor> getContributors() {
         return new Select()
                 .from(Contributor.class)
-                .where("SessionNumber = ?", sessionNumber)
-                .orderBy("Name ASC")
-                .execute();
-    }
-
-    /**
-     * Get the list of the contributors who have already bring the breakfast in this session.
-     * @param sessionNumber The number of the current session.
-     * @return The list of the contributors who have already bring the breakfast in this session.
-     */
-    public static List<Contributor> getAlreadyContributors(int sessionNumber) {
-        return new Select()
-                .from(Contributor.class)
-                .where("SessionNumber > ?", sessionNumber)
                 .orderBy("Name ASC")
                 .execute();
     }
@@ -84,10 +69,7 @@ public class Contributor extends Model implements Parcelable {
      * @return True if there is contributor in the database, false otherwise.
      */
     public static boolean isThereContributors() {
-        return new Select()
-                .from(Contributor.class)
-                .execute()
-                .size() > 0;
+        return getContributors().size() > 0;
     }
 
     /**

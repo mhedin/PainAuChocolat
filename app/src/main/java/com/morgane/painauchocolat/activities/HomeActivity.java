@@ -20,11 +20,6 @@ import com.morgane.painauchocolat.utils.Constant;
  */
 public class HomeActivity extends AppCompatActivity implements View.OnClickListener {
 
-    /**
-     * A constant corresponding to the minimum session number registered in the preferences.
-     */
-    public static final String PREFERENCES_MIN_SESSION_NUMBER = "minSessionNumber";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +37,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         // Find the min session number and register it
         int minSessionNumber = Contributor.getMinimumSessionNumber();
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        preferences.edit().putInt(PREFERENCES_MIN_SESSION_NUMBER, minSessionNumber).commit();
+        preferences.edit().putInt(Constant.PREFERENCES_MIN_SESSION_NUMBER, minSessionNumber).commit();
     }
 
     @Override
@@ -83,15 +78,8 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.home_find_bringer:
                 Intent intent = new Intent(this, BringerActivity.class);
-                startActivityForResult(intent, Constant.REQUEST_CODE_CREATE_CONTRIBUTOR);
+                startActivity(intent);
                 break;
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == Constant.REQUEST_CODE_CREATE_CONTRIBUTOR && resultCode == Activity.RESULT_OK) {
-            refreshView();
         }
     }
 

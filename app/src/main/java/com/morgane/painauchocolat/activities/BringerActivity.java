@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import com.morgane.painauchocolat.R;
 import com.morgane.painauchocolat.model.Contributor;
+import com.morgane.painauchocolat.utils.Constant;
 
 /**
  * This class displays the person who will bring the breakfast the day after. The user can accept
@@ -39,7 +40,7 @@ public class BringerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_bringer);
 
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        mMinSessionNumber = preferences.getInt(HomeActivity.PREFERENCES_MIN_SESSION_NUMBER, 0);
+        mMinSessionNumber = preferences.getInt(Constant.PREFERENCES_MIN_SESSION_NUMBER, 0);
 
         mBringer = Contributor.getRandomBringer(mMinSessionNumber);
 
