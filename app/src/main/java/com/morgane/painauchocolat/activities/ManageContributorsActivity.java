@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.EditText;
@@ -27,7 +29,7 @@ import com.morgane.painauchocolat.model.Contributor;
  * The user has also the visibility on the contributors who have already brought the breakfast
  * in this session, and the ones who haven't yet.
  */
-public class ManageContributorsActivity extends AppCompatActivity implements View.OnClickListener {
+public class ManageContributorsActivity extends AppCompatActivity implements View.OnClickListener, TextView.OnEditorActionListener {
 
     /**
      * The adapter of the list of the contributors who haven't bring
@@ -79,6 +81,8 @@ public class ManageContributorsActivity extends AppCompatActivity implements Vie
 
     @Override
     public void onClick(View view) {
+        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+
         switch (view.getId()) {
             case R.id.manage_contributors_add_button:
                 final View headerView = getLayoutInflater().inflate(R.layout.header_add_contributor, null);
@@ -95,8 +99,8 @@ public class ManageContributorsActivity extends AppCompatActivity implements Vie
 
                 EditText headerEdit = (EditText) headerView.findViewById(R.id.add_contributor_name);
                 headerEdit.requestFocus();
-                InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
                 imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
+                headerEdit.setOnEditorActionListener(this);
 
                 headerView.findViewById(R.id.add_contributor_validate).setOnClickListener(this);
 
@@ -114,12 +118,14 @@ public class ManageContributorsActivity extends AppCompatActivity implements Vie
                         mNoContributorAlert.setVisibility(View.GONE);
                     }
 
-                    mContributorsAdapter.add(contributor);
-                    mContributorsAdapter.notifyDataSetChanged();
-
-                    mContributorsListView.removeHeaderView(findViewById(R.id.add_contributor_layout));
-                    mAddButton.setVisibility(View.VISIBLE);
+                    mContributorsAdapter.replaceContributorList(Contributor.getContributors());
                 }
+
+                mContributorsListView.removeHeaderView(findViewById(R.id.add_contributor_layout));
+                mAddButton.setVisibility(View.VISIBLE);
+
+                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+
                 break;
         }
     }
@@ -145,5 +151,13 @@ public class ManageContributorsActivity extends AppCompatActivity implements Vie
         getSupportFragmentManager().beginTransaction().remove(fragment).commit();
         mAddButton.setVisibility(View.VISIBLE);
         mContributorsAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+        if (actionId == EditorInfo.IME_ACTION_DONE) {
+            findViewById(R.id.add_contributor_validate).performClick();
+        }
+        return false;
     }
 }
