@@ -9,6 +9,8 @@
     <string name="welcome_contributors">There is no contributor registered yet !\nClick on the button to add one</string>
 
     <string name="find_a_bringer">WHO\nwill bring them ?</string>
+    <string name="home_current_bringer_week">This week, it\'s %s who bring the breakfast !</string>
+    <string name="home_current_bringer_anyway">This time, it\'s %s who bring the breakfast !</string>
 
     <string name="validate_bringer">Validate</string>
     <string name="give_another_bringer">Another one ?</string>

@@ -40,6 +40,18 @@ public class Contributor extends Model implements Parcelable {
     }
 
     /**
+     * Get a contributor thanks to its id.
+     * @param id The id of the contributor.
+     * @return The contributor found.
+     */
+    public static Contributor getContributorById(long id) {
+        return new Select()
+                .from(Contributor.class)
+                .where("Id = ?", id)
+                .executeSingle();
+    }
+
+    /**
      * Get the list of all the contributors.
      * @return The list of the contributors.
      */

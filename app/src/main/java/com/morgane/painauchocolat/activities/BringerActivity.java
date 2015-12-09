@@ -53,6 +53,11 @@ public class BringerActivity extends AppCompatActivity {
     public void validateBringer(View view) {
         mBringer.sessionNumber = mMinSessionNumber + 1;
         mBringer.save();
+
+        // Add the current bringer to the preferences
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        preferences.edit().putLong(Constant.PREFERENCES_CURRENT_BRINGER, mBringer.getId()).commit();
+
         finish();
     }
 

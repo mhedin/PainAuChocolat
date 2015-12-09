@@ -2,5 +2,6 @@
 <resources>
 
     <item name="transparent_white" type="color">#99FFFFFF</item>
+    <item name="ecru" type="color">#f6f6f6</item>
 
 </resources>

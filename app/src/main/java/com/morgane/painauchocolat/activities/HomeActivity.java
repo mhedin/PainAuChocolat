@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 
 import com.morgane.painauchocolat.R;
 import com.morgane.painauchocolat.model.Contributor;
@@ -38,6 +39,25 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         int minSessionNumber = Contributor.getMinimumSessionNumber();
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         preferences.edit().putInt(Constant.PREFERENCES_MIN_SESSION_NUMBER, minSessionNumber).commit();
+
+        long currentBringerId = preferences.getLong(Constant.PREFERENCES_CURRENT_BRINGER, -1);
+        if (currentBringerId != -1) {
+            Contributor currentBringer = Contributor.getContributorById(currentBringerId);
+
+            if (currentBringer != null) {
+                TextView currentBringerTextView = (TextView) findViewById(R.id.home_current_bringer);
+                currentBringerTextView.setVisibility(View.VISIBLE);
+
+                int textId;
+                if (preferences.getInt(Constant.PREFERENCES_BREAKFAST_DAY, 0) == 0) {
+                    textId = R.string.home_current_bringer_anyway;
+                } else {
+                    textId = R.string.home_current_bringer_week;
+                }
+
+                currentBringerTextView.setText(getString(textId, currentBringer.name));
+            }
+        }
     }
 
     @Override

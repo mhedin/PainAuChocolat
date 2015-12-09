@@ -10,4 +10,5 @@ public class Constant {
     // Preferences
     public static final String PREFERENCES_MIN_SESSION_NUMBER = "minSessionNumber";
     public static final String PREFERENCES_BREAKFAST_DAY = "breakfastDay";
+    public static final String PREFERENCES_CURRENT_BRINGER = "currentBringer";
 }
