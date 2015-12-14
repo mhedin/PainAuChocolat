@@ -87,11 +87,7 @@ public class ContributorPagerAdapter extends PagerAdapter {
             if (mContributor.sessionNumber <= mMinSessionNumber) {
                 textView.setCompoundDrawablesWithIntrinsicBounds(R.mipmap.ic_launcher, 0, 0, 0);
             } else {
-                textView.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
-                BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
-                bitmapOptions.inJustDecodeBounds = true;
-                BitmapFactory.decodeResource(mActivity.getResources(), R.mipmap.ic_launcher, bitmapOptions);
-                additionalPadding = bitmapOptions.outWidth;
+                textView.setCompoundDrawablesWithIntrinsicBounds(R.mipmap.ic_check_mark, 0, 0, 0);
             }
 
         } else {

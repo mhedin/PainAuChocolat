@@ -74,7 +74,6 @@ public class ManageContributorsActivity extends AppCompatActivity implements Vie
 
         // If there is no contributor registered, display the help message
         if (contributors.size() == 0) {
-            mContributorsListView.setVisibility(View.GONE);
             mNoContributorAlert.setVisibility(View.VISIBLE);
         }
     }
@@ -114,7 +113,6 @@ public class ManageContributorsActivity extends AppCompatActivity implements Vie
                     contributor.save();
 
                     if (mContributorsAdapter.getCount() == 0) {
-                        mContributorsListView.setVisibility(View.VISIBLE);
                         mNoContributorAlert.setVisibility(View.GONE);
                     }
 
