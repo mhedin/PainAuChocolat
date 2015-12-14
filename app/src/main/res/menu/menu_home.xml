@@ -1,14 +1,22 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" tools:context=".HomeActivity">
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".HomeActivity">
+
     <item android:id="@+id/action_bakery"
         android:title="@string/action_bakery"
-        android:showAsAction="collapseActionView"/>
+        app:showAsAction="collapseActionView"/>
 
     <item android:id="@+id/action_contributors"
         android:title="@string/action_contributors"
-        android:showAsAction="collapseActionView"/>
+        app:showAsAction="collapseActionView"/>
 
     <item android:id="@+id/action_settings"
         android:title="@string/action_settings"
-        android:showAsAction="collapseActionView"/>
+        app:showAsAction="collapseActionView"/>
+
+    <item android:id="@+id/action_credits"
+        android:title="@string/action_credits"
+        app:showAsAction="collapseActionView"/>
+
 </menu>

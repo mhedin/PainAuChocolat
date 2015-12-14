@@ -80,8 +80,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                 intent = new Intent(this, ManageContributorsActivity.class);
                 break;
 
-            case R.id.action_settings :
+            case R.id.action_settings:
                 intent = new Intent(this, SettingsActivity.class);
+                break;
+
+            case R.id.action_credits:
+                intent = new Intent(this, CreditsActivity.class);
                 break;
         }
 

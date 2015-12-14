@@ -1,11 +1,12 @@
 package com.morgane.painauchocolat.activities;
 
-import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.morgane.painauchocolat.R;
@@ -17,7 +18,7 @@ import com.morgane.painauchocolat.utils.Constant;
  * the random choice of person or ask for another one who hasn't bring the breakfast in this session
  * yet.
  */
-public class BringerActivity extends AppCompatActivity {
+public class BringerActivity extends AppCompatActivity implements View.OnClickListener {
 
     /**
      * This contributor selected to be the bringer.
@@ -34,6 +35,16 @@ public class BringerActivity extends AppCompatActivity {
      */
     private int mMinSessionNumber;
 
+    /**
+     * The button used to validate the current bringer.
+     */
+    private Button mValidateButton;
+
+    /**
+     * The button used to find another bringer.
+     */
+    private Button mAnotherButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,27 +53,73 @@ public class BringerActivity extends AppCompatActivity {
         SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
         mMinSessionNumber = preferences.getInt(Constant.PREFERENCES_MIN_SESSION_NUMBER, 0);
 
-        mBringer = Contributor.getRandomBringer(mMinSessionNumber);
+        mValidateButton = (Button) findViewById(R.id.bringer_validate);
+        mValidateButton.setOnClickListener(this);
+
+        mAnotherButton = (Button) findViewById(R.id.bringer_another);
+        mAnotherButton.setOnClickListener(this);
 
         mBringerTextView = (TextView) findViewById(R.id.bringer_name);
-        if (mBringer != null) {
-            mBringerTextView.setText(mBringer.name);
+
+        findABringer();
+    }
+
+    /**
+     * Generate a new bringer, different from the previous one if the user clicks on the
+     * "another bringer" button, with a little waiting time symbolized by points.
+     */
+    public void findABringer() {
+        mValidateButton.setEnabled(false);
+        mAnotherButton.setEnabled(false);
+
+        Contributor newBringer;
+        do {
+            newBringer = Contributor.getRandomBringer(mMinSessionNumber);
+
+        } while(mBringer != null && Contributor.getContributors().size() > 1 && mBringer.name.equals(newBringer.name));
+
+        mBringer = newBringer;
+
+        new CountDownTimer(4000, 1000) {
+
+            public void onTick(long millisUntilFinished) {
+                // Show a waiting time with points, or remove text if it's a new bringer to found
+                if (mBringerTextView.getText() != null
+                        && mBringerTextView.getText().length() > 0
+                        && (mBringerTextView.getText().equals(".") || mBringerTextView.getText().equals(".."))) {
+                    mBringerTextView.setText(mBringerTextView.getText() + ".");
+                } else {
+                    mBringerTextView.setText(".");
+                }
+            }
+
+            public void onFinish() {
+                mBringerTextView.setText(mBringer.name);
+                mAnotherButton.setEnabled(true);
+                mValidateButton.setEnabled(true);
+            }
+
+        }.start();
+    }
+
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.bringer_another:
+                findABringer();
+                break;
+
+            case R.id.bringer_validate:
+                mBringer.sessionNumber = mMinSessionNumber + 1;
+                mBringer.save();
+
+                // Add the current bringer to the preferences
+                SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+                preferences.edit().putLong(Constant.PREFERENCES_CURRENT_BRINGER, mBringer.getId()).commit();
+
+                finish();
+                break;
         }
-    }
-
-    public void validateBringer(View view) {
-        mBringer.sessionNumber = mMinSessionNumber + 1;
-        mBringer.save();
-
-        // Add the current bringer to the preferences
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        preferences.edit().putLong(Constant.PREFERENCES_CURRENT_BRINGER, mBringer.getId()).commit();
-
-        finish();
-    }
-
-    public void findAnotherBringer(View view) {
-        mBringer = Contributor.getRandomBringer(mMinSessionNumber);
-        mBringerTextView.setText(mBringer.name);
     }
 }

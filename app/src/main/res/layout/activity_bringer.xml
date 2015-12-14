@@ -8,8 +8,8 @@
 
     <TextView
         android:id="@+id/bringer_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_above="@+id/bringer_buttons"
         android:background="@drawable/bringer_background_colored"
         android:paddingBottom="35dp"
@@ -30,16 +30,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/validate_bringer"
-            android:onClick="validateBringer"/>
+            android:text="@string/validate_bringer"/>
 
         <Button
             android:id="@+id/bringer_another"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/give_another_bringer"
-            android:onClick="findAnotherBringer"/>
+            android:text="@string/give_another_bringer"/>
 
     </LinearLayout>
 

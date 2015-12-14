@@ -37,6 +37,10 @@
         <activity
             android:name="com.morgane.painauchocolat.activities.SettingsActivity"
             android:label="@string/action_settings" />
+
+        <activity android:name=".activities.CreditsActivity"
+            android:label="@string/action_credits" />
+        
     </application>
 
 </manifest>

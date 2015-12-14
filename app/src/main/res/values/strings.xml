@@ -4,6 +4,7 @@
     <string name="action_bakery">I need a bakery</string>
     <string name="action_settings">Choose the breakfast day</string>
     <string name="action_contributors">Manage the contributors</string>
+    <string name="action_credits">Credits</string>
 
     <string name="welcome_home">Welcome in the Pain au Chocolat app !\nThis app will allow you to choose randomly the person who will bring the breakfast the next morning. First, you have to add contributors by clicking on the \"Manage the contributors\" menu</string>
     <string name="welcome_contributors">There is no contributor registered yet !\nClick on the button to add one</string>
@@ -33,4 +34,10 @@
         <item>Saturday</item>
         <item>Sunday</item>
     </string-array>
+
+    <string name="credits_links">Some icons and pictures were made by <i>Freepik</i>:\n\n &#8226; <a href="http://fr.freepik.com/photos-vecteurs-libre/fleche">Arrow vector designed by Freepik</a>\n\n &#8226; <a href="http://fr.freepik.com/photos-vecteurs-libre/nourriture">Food vector designed by Freepik</a>\n\n &#8226; Check mark icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a></string>
+
+    <string name="notification_title">It\'s time to choose the next bringer !</string>
+    <string name="notification_message">Click to access the application</string>
+
 </resources>
