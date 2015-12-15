@@ -1,0 +1,40 @@
+<resources>
+    <string name="app_name">Pain Au Chocolat</string>
+
+    <string name="action_bakery">J\'ai besoin d\'une boulangerie</string>
+    <string name="action_settings">Choisir le jour du petit déjeuner</string>
+    <string name="action_contributors">Gérer les contributeurs</string>
+    <string name="action_credits">Crédits</string>
+
+    <string name="welcome_home">Bienvenue dans l\'application Pain au Chocolat !\nCette application va vous permettre de choisir de manière aléatoire la personne qui apportera le petit déjeuner le matin suivant. Tout d\'abord, vous devez ajouter des contributeurs en cliquant sur le menu \"Gérer les contributeurs\"</string>
+    <string name="welcome_contributors">Il n\'y a aucun contributeur enregistré pour le moment !\nCliquez sur le bouton pour en ajouter un</string>
+
+    <string name="find_a_bringer">QUI\nva les apporter ?</string>
+    <string name="home_current_bringer_week">Cette semaine, c\'est %s qui apporte le petit déjeuner !</string>
+    <string name="home_current_bringer_anyway">Cette fois, c\'est %s qui apporte le petit déjeuner !</string>
+
+    <string name="validate_bringer">Valider</string>
+    <string name="give_another_bringer">Quelqu\'un d\'autre ?</string>
+
+    <string name="manage_contributors">Gérer les contributeurs</string>
+    <string name="contributor_delete">Supprimé</string>
+
+    <string name="settings_choose_day">Choisissez le Jour du Petit Déjeuner et un rappel vous sera envoyé la veille pour que vous choisissiez le rapporteur, ou choisissez \"aucun\" pour être libre d\'avoir des petits déjeuners tous les jours où vous le souhaitez :</string>
+
+    <string-array name="settings_days">
+        <item>Aucun</item>
+        <item>Lundi</item>
+        <item>Mardi</item>
+        <item>Mercredi</item>
+        <item>Jeudi</item>
+        <item>Vendredi</item>
+        <item>Samedi</item>
+        <item>Dimanche</item>
+    </string-array>
+
+    <string name="credits_links">Certains icônes et images ont été réalisés par <i>Freepik</i>:\n\n &#8226; <a href="http://fr.freepik.com/photos-vecteurs-libre/fleche">Vecteur de Flèche conçu par Freepik</a>\n\n &#8226; <a href="http://fr.freepik.com/photos-vecteurs-libre/nourriture">Vecteur de Nourriture conçu par Freepik</a>\n\n &#8226; Icônes coche réalisés par <a href="http://www.freepik.com" title="Freepik">Freepik</a> depuis <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> licencié par <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a></string>
+
+    <string name="notification_title">C\'est l\'heure de choisir le prochain rapporteur !</string>
+    <string name="notification_message">Cliquez pour accéder à l\'application</string>
+
+</resources>
