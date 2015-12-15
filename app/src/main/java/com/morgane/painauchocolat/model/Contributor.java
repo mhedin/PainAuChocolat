@@ -20,10 +20,10 @@ import java.util.List;
 public class Contributor extends Model implements Parcelable {
 
     @Column(name = "Name")
-    public String name;
+    private String name;
 
     @Column(name = "SessionNumber")
-    public int sessionNumber;
+    private int sessionNumber;
 
     public Contributor() {
 
@@ -37,6 +37,22 @@ public class Contributor extends Model implements Parcelable {
     public Contributor(Parcel in){
         this.name = in.readString();
         this.sessionNumber = in.readInt();
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getSessionNumber() {
+        return sessionNumber;
+    }
+
+    public void setName(String _name) {
+        this.name = _name;
+    }
+
+    public void setSessionNumber(int _sessionNumber) {
+        this.sessionNumber = _sessionNumber;
     }
 
     /**

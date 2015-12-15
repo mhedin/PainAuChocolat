@@ -1,6 +1,5 @@
 package com.morgane.painauchocolat.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -55,7 +54,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
                     textId = R.string.home_current_bringer_week;
                 }
 
-                currentBringerTextView.setText(getString(textId, currentBringer.name));
+                currentBringerTextView.setText(getString(textId, currentBringer.getName()));
             }
         }
     }

@@ -76,7 +76,7 @@ public class BringerActivity extends AppCompatActivity implements View.OnClickLi
         do {
             newBringer = Contributor.getRandomBringer(mMinSessionNumber);
 
-        } while(mBringer != null && Contributor.getContributors().size() > 1 && mBringer.name.equals(newBringer.name));
+        } while(mBringer != null && Contributor.getContributors().size() > 1 && mBringer.getName().equals(newBringer.getName()));
 
         mBringer = newBringer;
 
@@ -94,7 +94,7 @@ public class BringerActivity extends AppCompatActivity implements View.OnClickLi
             }
 
             public void onFinish() {
-                mBringerTextView.setText(mBringer.name);
+                mBringerTextView.setText(mBringer.getName());
                 mAnotherButton.setEnabled(true);
                 mValidateButton.setEnabled(true);
             }
@@ -111,7 +111,7 @@ public class BringerActivity extends AppCompatActivity implements View.OnClickLi
                 break;
 
             case R.id.bringer_validate:
-                mBringer.sessionNumber = mMinSessionNumber + 1;
+                mBringer.setSessionNumber(mMinSessionNumber + 1);
                 mBringer.save();
 
                 // Add the current bringer to the preferences

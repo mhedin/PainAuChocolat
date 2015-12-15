@@ -63,7 +63,7 @@ public class EditContributorFragment extends Fragment implements View.OnClickLis
         mContributor = getArguments().getParcelable(ARG_CONTRIBUTOR);
 
         mNameEditText = (EditText) view.findViewById(R.id.edit_contributor_name);
-        mNameEditText.setText(mContributor.name);
+        mNameEditText.setText(mContributor.getName());
         mNameEditText.setOnEditorActionListener(this);
 
         BitmapFactory.Options bitmapOptions = new BitmapFactory.Options();
@@ -102,8 +102,8 @@ public class EditContributorFragment extends Fragment implements View.OnClickLis
         if (actionId == EditorInfo.IME_ACTION_DONE) {
             if (v.getText() != null
                     && v.getText().length() > 0
-                    && !v.getText().toString().equals(mContributor.name)) {
-                mContributor.name = v.getText().toString();
+                    && !v.getText().toString().equals(mContributor.getName())) {
+                mContributor.setName(v.getText().toString());
                 mContributor.save();
             }
 

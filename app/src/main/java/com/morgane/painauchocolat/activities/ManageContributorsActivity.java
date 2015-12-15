@@ -10,7 +10,6 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListView;
@@ -122,7 +121,9 @@ public class ManageContributorsActivity extends AppCompatActivity implements Vie
                 mContributorsListView.removeHeaderView(findViewById(R.id.add_contributor_layout));
                 mAddButton.setVisibility(View.VISIBLE);
 
-                imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                if (getCurrentFocus() != null) {
+                    imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+                }
 
                 break;
         }
@@ -143,8 +144,10 @@ public class ManageContributorsActivity extends AppCompatActivity implements Vie
     }
 
     public void closeFragment(Fragment fragment) {
-        InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        if (getCurrentFocus() != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
+        }
 
         getSupportFragmentManager().beginTransaction().remove(fragment).commit();
         mAddButton.setVisibility(View.VISIBLE);

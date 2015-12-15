@@ -83,7 +83,7 @@ public class ContributorAdapter extends ArrayAdapter<Contributor> {
             /**
              * The time to wait before removing an item of the list, in milliseconds.
              */
-            private final static int DELAY_BEFORE_REMOVAL = 3000;
+            private final static int DELAY_BEFORE_REMOVAL = 1500;
 
             /**
              * The handler used to remove a contributor after a delay.
@@ -128,17 +128,11 @@ public class ContributorAdapter extends ArrayAdapter<Contributor> {
     }
 
     /**
-     * Replace the current contributor list with the one given in parameters,
-     * and refresh the view.
+     * Replace the current contributor list with the one given in parameters.
      * @param contributors The new contributor list.
      */
     public void replaceContributorList(List<Contributor> contributors) {
-        while (getCount() > 0) {
-            remove(getItem(0));
-        }
-
+        clear();
         addAll(contributors);
-
-        notifyDataSetChanged();
     }
 }

@@ -1,8 +1,6 @@
 package com.morgane.painauchocolat.adapters;
 
 import android.app.Activity;
-import android.graphics.BitmapFactory;
-import android.graphics.Typeface;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.view.Gravity;
@@ -74,8 +72,8 @@ public class ContributorPagerAdapter extends PagerAdapter {
         int additionalPadding = 0;
 
         if (position == 0) {
-            textView.setText(mContributor.name);
-            textView.setBackgroundColor(mActivity.getResources().getColor(android.R.color.transparent));
+            textView.setText(mContributor.getName());
+            textView.setBackgroundColor(ContextCompat.getColor(mActivity, android.R.color.transparent));
 
             textView.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -84,7 +82,7 @@ public class ContributorPagerAdapter extends PagerAdapter {
                 }
             });
 
-            if (mContributor.sessionNumber <= mMinSessionNumber) {
+            if (mContributor.getSessionNumber() <= mMinSessionNumber) {
                 textView.setCompoundDrawablesWithIntrinsicBounds(R.mipmap.ic_launcher, 0, 0, 0);
             } else {
                 textView.setCompoundDrawablesWithIntrinsicBounds(R.mipmap.ic_check_mark, 0, 0, 0);
@@ -93,7 +91,7 @@ public class ContributorPagerAdapter extends PagerAdapter {
         } else {
             textView.setText(R.string.contributor_delete);
             textView.setTextColor(ContextCompat.getColor(mActivity, android.R.color.white));
-            textView.setBackgroundColor(mActivity.getResources().getColor(android.R.color.holo_red_light));
+            textView.setBackgroundColor(ContextCompat.getColor(mActivity, android.R.color.holo_red_light));
             additionalPadding = textView.getPaddingRight();
         }
 
