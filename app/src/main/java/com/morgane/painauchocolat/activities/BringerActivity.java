@@ -111,6 +111,8 @@ public class BringerActivity extends AppCompatActivity implements View.OnClickLi
                 break;
 
             case R.id.bringer_validate:
+                setResult(RESULT_OK);
+
                 mBringer.setSessionNumber(mMinSessionNumber + 1);
                 mBringer.save();
 

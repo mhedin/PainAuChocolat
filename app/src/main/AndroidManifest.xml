@@ -27,7 +27,7 @@
 
         <activity
             android:name="com.morgane.painauchocolat.activities.BringerActivity"
-            android:label="@string/app_name" />
+            android:label="@string/activity_bringer" />
 
         <activity
             android:name="com.morgane.painauchocolat.activities.ManageContributorsActivity"

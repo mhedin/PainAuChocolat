@@ -5,6 +5,7 @@
     <string name="action_settings">Choisir le jour du petit déjeuner</string>
     <string name="action_contributors">Gérer les contributeurs</string>
     <string name="action_credits">Crédits</string>
+    <string name="activity_bringer">Qui va les apporter ?</string>
 
     <string name="welcome_home">Bienvenue dans l\'application Pain au Chocolat !\nCette application va vous permettre de choisir de manière aléatoire la personne qui apportera le petit déjeuner le matin suivant. Tout d\'abord, vous devez ajouter des contributeurs en cliquant sur le menu \"Gérer les contributeurs\"</string>
     <string name="welcome_contributors">Il n\'y a aucun contributeur enregistré pour le moment !\nCliquez sur le bouton pour en ajouter un</string>

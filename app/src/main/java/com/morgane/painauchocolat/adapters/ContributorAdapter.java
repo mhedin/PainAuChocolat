@@ -135,4 +135,11 @@ public class ContributorAdapter extends ArrayAdapter<Contributor> {
         clear();
         addAll(contributors);
     }
+
+    @Override
+    public void notifyDataSetChanged() {
+        // Set the result to ok to refresh the home page if there were modifications in the contributors
+        ((Activity)getContext()).setResult(Activity.RESULT_OK);
+        super.notifyDataSetChanged();
+    }
 }

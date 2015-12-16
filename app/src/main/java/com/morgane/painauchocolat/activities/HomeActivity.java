@@ -1,5 +1,6 @@
 package com.morgane.painauchocolat.activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -8,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.morgane.painauchocolat.R;
@@ -31,35 +33,6 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-
-        // Find the min session number and register it
-        int minSessionNumber = Contributor.getMinimumSessionNumber();
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
-        preferences.edit().putInt(Constant.PREFERENCES_MIN_SESSION_NUMBER, minSessionNumber).commit();
-
-        long currentBringerId = preferences.getLong(Constant.PREFERENCES_CURRENT_BRINGER, -1);
-        if (currentBringerId != -1) {
-            Contributor currentBringer = Contributor.getContributorById(currentBringerId);
-
-            if (currentBringer != null) {
-                TextView currentBringerTextView = (TextView) findViewById(R.id.home_current_bringer);
-                currentBringerTextView.setVisibility(View.VISIBLE);
-
-                int textId;
-                if (preferences.getInt(Constant.PREFERENCES_BREAKFAST_DAY, 0) == 0) {
-                    textId = R.string.home_current_bringer_anyway;
-                } else {
-                    textId = R.string.home_current_bringer_week;
-                }
-
-                currentBringerTextView.setText(getString(textId, currentBringer.getName()));
-            }
-        }
-    }
-
-    @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_home, menu);
@@ -69,6 +42,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         Intent intent = null;
+        int requestCode = -1;
 
         switch (item.getItemId()) {
             case R.id.action_bakery:
@@ -77,6 +51,7 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
 
             case R.id.action_contributors:
                 intent = new Intent(this, ManageContributorsActivity.class);
+                requestCode = Constant.REQUEST_CODE_CREATE_CONTRIBUTOR;
                 break;
 
             case R.id.action_settings:
@@ -89,7 +64,12 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         if (intent != null) {
-            startActivity(intent);
+            if (requestCode != -1) {
+                startActivityForResult(intent, requestCode);
+            } else {
+                startActivity(intent);
+            }
+
             return true;
         }
 
@@ -101,8 +81,17 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
         switch (v.getId()) {
             case R.id.home_find_bringer:
                 Intent intent = new Intent(this, BringerActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, Constant.REQUEST_CODE_FIND_BRINGER);
                 break;
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == Activity.RESULT_OK
+                && (requestCode == Constant.REQUEST_CODE_CREATE_CONTRIBUTOR
+                    || requestCode == Constant.REQUEST_CODE_FIND_BRINGER)) {
+            refreshView();
         }
     }
 
@@ -111,10 +100,49 @@ public class HomeActivity extends AppCompatActivity implements View.OnClickListe
      * or a help message if there is not.
      */
     private void refreshView() {
+        // Find the min session number and register it
+        int minSessionNumber = Contributor.getMinimumSessionNumber();
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        preferences.edit().putInt(Constant.PREFERENCES_MIN_SESSION_NUMBER, minSessionNumber).commit();
+
+        TextView currentBringerTextView = (TextView) findViewById(R.id.home_current_bringer);
+        Button findBringerButton = (Button) findViewById(R.id.home_find_bringer);
+        TextView noContributorTextView = (TextView) findViewById(R.id.home_no_contributor);
+
         // If there is no contributor registered, display the help message
         if (!Contributor.isThereContributors()) {
-            findViewById(R.id.home_find_bringer).setVisibility(View.GONE);
-            findViewById(R.id.home_no_contributor).setVisibility(View.VISIBLE);
+            findBringerButton.setVisibility(View.GONE);
+            noContributorTextView.setVisibility(View.VISIBLE);
+            currentBringerTextView.setVisibility(View.INVISIBLE);
+
+        } else {
+            findBringerButton.setVisibility(View.VISIBLE);
+            noContributorTextView.setVisibility(View.GONE);
+
+            // If there is a current bringer, display it
+            long currentBringerId = preferences.getLong(Constant.PREFERENCES_CURRENT_BRINGER, -1);
+            if (currentBringerId != -1) {
+                Contributor currentBringer = Contributor.getContributorById(currentBringerId);
+
+                if (currentBringer != null) {
+                    currentBringerTextView.setVisibility(View.VISIBLE);
+
+                    int textId;
+                    if (preferences.getInt(Constant.PREFERENCES_BREAKFAST_DAY, 0) == 0) {
+                        textId = R.string.home_current_bringer_anyway;
+                    } else {
+                        textId = R.string.home_current_bringer_week;
+                    }
+
+                    currentBringerTextView.setText(getString(textId, currentBringer.getName()));
+
+                } else {
+                    currentBringerTextView.setVisibility(View.INVISIBLE);
+                }
+
+            } else {
+                currentBringerTextView.setVisibility(View.INVISIBLE);
+            }
         }
     }
 }

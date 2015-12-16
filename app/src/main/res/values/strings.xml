@@ -5,6 +5,7 @@
     <string name="action_settings">Choose the breakfast day</string>
     <string name="action_contributors">Manage the contributors</string>
     <string name="action_credits">Credits</string>
+    <string name="activity_bringer">Who will bring them ?</string>
 
     <string name="welcome_home">Welcome in the Pain au Chocolat app!\nThis app will allow you to choose randomly the person who will bring the breakfast the next morning. First, you have to add contributors by clicking on the \"Manage the contributors\" menu</string>
     <string name="welcome_contributors">There is no contributor registered yet!\nClick on the button to add one</string>
