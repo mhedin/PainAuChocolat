@@ -14,7 +14,7 @@
         android:drawablePadding="20dp"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
-        android:drawableBottom="@drawable/arrow_top_to_back"
+        android:drawableBottom="@drawable/arrow_top_to_bottom_right"
         android:visibility="gone"/>
 
     <ListView

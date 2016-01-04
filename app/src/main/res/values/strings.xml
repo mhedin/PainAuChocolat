@@ -33,7 +33,11 @@
         <item>Sunday</item>
     </string-array>
 
-    <string name="credits_links">Some icons and pictures were made by <i>Freepik</i>:\n\n &#8226; <a href="http://fr.freepik.com/photos-vecteurs-libre/fleche">Arrow vector designed by Freepik</a>\n\n &#8226; <a href="http://fr.freepik.com/photos-vecteurs-libre/nourriture">Food vector designed by Freepik</a>\n\n &#8226; Check mark icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a></string>
+    <string name="credits_links">Icons and pictures come from :\n\n
+        &#8226; <a href="http://fr.freepik.com/photos-vecteurs-libre/fleche">Arrow vector designed by Freepik</a>\n\n
+        &#8226; <a href="http://fr.freepik.com/photos-vecteurs-libre/nourriture">Food vector designed by Freepik</a>\n\n
+        &#8226; Check mark icons and menu icons made by <a href="http://www.freepik.com" title="Freepik">Freepik</a> from <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> is licensed by <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a>\n\n
+        &#8226; <a href="https://design.google.com/icons/">Icons designed by Google</a></string>
 
     <string name="notification_title">It\'s time to choose the next bringer!</string>
     <string name="notification_message">Click to access the application</string>

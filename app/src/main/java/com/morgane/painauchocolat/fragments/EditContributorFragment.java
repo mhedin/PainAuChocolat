@@ -15,7 +15,7 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.morgane.painauchocolat.R;
-import com.morgane.painauchocolat.activities.ManageContributorsActivity;
+import com.morgane.painauchocolat.activities.MainActivity;
 import com.morgane.painauchocolat.model.Contributor;
 
 /**
@@ -94,7 +94,7 @@ public class EditContributorFragment extends Fragment implements View.OnClickLis
 
     @Override
     public void onClick(View v) {
-        ((ManageContributorsActivity)getActivity()).closeFragment(this);
+        ((MainActivity)getActivity()).closeContributorFragment(this);
     }
 
     @Override
@@ -107,7 +107,7 @@ public class EditContributorFragment extends Fragment implements View.OnClickLis
                 mContributor.save();
             }
 
-            ((ManageContributorsActivity)getActivity()).closeFragment(this);
+            ((MainActivity)getActivity()).closeContributorFragment(this);
         }
         return false;
     }

@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.morgane.painauchocolat.R;
-import com.morgane.painauchocolat.activities.ManageContributorsActivity;
+import com.morgane.painauchocolat.activities.MainActivity;
 import com.morgane.painauchocolat.model.Contributor;
 
 /**
@@ -78,7 +78,7 @@ public class ContributorPagerAdapter extends PagerAdapter {
             textView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ((ManageContributorsActivity)mActivity).editContributor(mParentPosition);
+                    ((MainActivity)mActivity).editContributor(mParentPosition);
                 }
             });
 

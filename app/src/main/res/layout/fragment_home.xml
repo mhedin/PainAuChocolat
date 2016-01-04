@@ -21,8 +21,8 @@
         android:id="@+id/home_current_bringer"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
         android:layout_marginBottom="10dp"/>
 
     <TextView
@@ -34,7 +34,7 @@
         android:textSize="20sp"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
-        android:layout_alignParentTop="true"
-        android:drawableTop="@drawable/arrow_back_to_top"/>
+        android:drawablePadding="15dp"
+        android:drawableBottom="@drawable/arrow_top_to_bottom_left"/>
 
 </RelativeLayout>
