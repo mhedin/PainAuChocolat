@@ -1,34 +1,16 @@
-<android.support.v4.app.FragmentTabHost xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@android:id/tabhost"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".activities.MainActivity">
 
-    <RelativeLayout
+    <include layout="@layout/toolbar"
+        android:id="@+id/toolbar" />
+
+    <FrameLayout
+        android:id="@+id/main_fragment_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@android:color/black">
+        android:layout_height="match_parent" />
 
-        <TabWidget
-            android:id="@android:id/tabs"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="10dp"
-            android:paddingTop="10dp"
-            android:layout_marginTop="1dp"
-            android:background="@android:color/white"
-            android:layout_alignParentBottom="true"/>
-
-        <FrameLayout
-            android:id="@android:id/tabcontent"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_above="@android:id/tabs"
-            android:background="@android:color/white"
-            android:layout_weight="1"/>
-
-    </RelativeLayout>
-
-</android.support.v4.app.FragmentTabHost>
+</LinearLayout>

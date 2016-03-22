@@ -78,7 +78,7 @@ public class ContributorPagerAdapter extends PagerAdapter {
             textView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ((MainActivity)mActivity).editContributor(mParentPosition);
+                    ((MainActivity)mActivity).editContributor(mParentPosition, ((ViewGroup)v.getParent().getParent()).getTop());
                 }
             });
 

@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="AppTheme" parent="Theme.AppCompat.Light">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowBackground">@android:color/white</item>
         <item name="android:textViewStyle">@style/CustomTextViewStyle</item>
         <item name="android:editTextStyle">@style/CustomEditTextStyle</item>
+        <item name="android:colorPrimary">@android:color/darker_gray</item>
     </style>
 
     <style name="CustomTextViewStyle" parent="android:Widget.TextView">

@@ -35,6 +35,16 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private Button mFindBringerButton;
 
     /**
+     * The button to select the bringer.
+     */
+    private Button mValidateBringerButton;
+
+    /**
+     * The button to ask for another bringer.
+     */
+    private Button mAnotherBringerButton;
+
+    /**
      * The view displaying the information message when there is no contributor registered.
      */
     private TextView mNoContributorTextView;
@@ -44,11 +54,15 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_home, container, false);
 
-        view.findViewById(R.id.home_find_bringer).setOnClickListener(this);
+        mCurrentBringerTextView = (TextView) view.findViewById(R.id.bringer_name);
+//        mFindBringerButton = (Button) view.findViewById(R.id.bringer_new);
+//        mValidateBringerButton = (Button) view.findViewById(R.id.bringer_validate);
+//        mAnotherBringerButton = (Button) view.findViewById(R.id.bringer_another);
+//        mNoContributorTextView = (TextView) view.findViewById(R.id.home_no_contributor);
 
-        mCurrentBringerTextView = (TextView) view.findViewById(R.id.home_current_bringer);
-        mFindBringerButton = (Button) view.findViewById(R.id.home_find_bringer);
-        mNoContributorTextView = (TextView) view.findViewById(R.id.home_no_contributor);
+//        mFindBringerButton.setOnClickListener(this);
+//        mValidateBringerButton.setOnClickListener(this);
+//        mAnotherBringerButton.setOnClickListener(this);
 
         refreshView();
 
@@ -64,10 +78,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.home_find_bringer:
-                Intent intent = new Intent(getActivity(), BringerActivity.class);
-                startActivityForResult(intent, Constant.REQUEST_CODE_FIND_BRINGER);
-                break;
+//            case R.id.home_find_bringer:
+//                Intent intent = new Intent(getActivity(), BringerActivity.class);
+//                startActivityForResult(intent, Constant.REQUEST_CODE_FIND_BRINGER);
+//                break;
         }
     }
 
@@ -92,13 +106,13 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         // If there is no contributor registered, display the help message
         if (!Contributor.isThereContributors()) {
-            mFindBringerButton.setVisibility(View.GONE);
-            mNoContributorTextView.setVisibility(View.VISIBLE);
-            mCurrentBringerTextView.setVisibility(View.INVISIBLE);
+//            mFindBringerButton.setVisibility(View.GONE);
+//            mNoContributorTextView.setVisibility(View.VISIBLE);
+//            mCurrentBringerTextView.setVisibility(View.INVISIBLE);
 
         } else {
-            mFindBringerButton.setVisibility(View.VISIBLE);
-            mNoContributorTextView.setVisibility(View.GONE);
+//            mFindBringerButton.setVisibility(View.VISIBLE);
+//            mNoContributorTextView.setVisibility(View.GONE);
 
             // If there is a current bringer, display it
             long currentBringerId = preferences.getLong(Constant.PREFERENCES_CURRENT_BRINGER, -1);

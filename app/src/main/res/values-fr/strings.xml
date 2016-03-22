@@ -11,7 +11,7 @@
     <string name="welcome_contributors">Il n\'y a aucun contributeur enregistré pour le moment !\nCliquez sur le bouton pour en ajouter un</string>
 
     <string name="find_a_bringer">QUI\nva les apporter ?</string>
-    <string name="home_current_bringer_week">Cette semaine, c\'est %s qui apporte le petit déjeuner !</string>
+    <string name="home_current_bringer_week">Ce %1$s, c\'est %2$s qui apporte le petit déjeuner !</string>
     <string name="home_current_bringer_anyway">Cette fois, c\'est %s qui apporte le petit déjeuner !</string>
 
     <string name="validate_bringer">Valider</string>
@@ -33,7 +33,7 @@
         <item>Dimanche</item>
     </string-array>
 
-    <string name="credits_links">Certains icônes et images ont été réalisés par <i>Freepik</i>:\n\n
+    <string name="credits_links">Les icônes et images viennent de :\n\n
         &#8226; <a href="http://fr.freepik.com/photos-vecteurs-libre/fleche">Vecteur de Flèche conçu par Freepik</a>\n\n
         &#8226; <a href="http://fr.freepik.com/photos-vecteurs-libre/nourriture">Vecteur de Nourriture conçu par Freepik</a>\n\n
         &#8226; Icônes coche et icônes du menu réalisés par <a href="http://www.freepik.com" title="Freepik">Freepik</a> depuis <a href="http://www.flaticon.com" title="Flaticon">www.flaticon.com</a> licencié par <a href="http://creativecommons.org/licenses/by/3.0/" title="Creative Commons BY 3.0">CC BY 3.0</a>\n\n

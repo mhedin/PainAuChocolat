@@ -123,6 +123,8 @@ public class ManageContributorsFragment extends Fragment implements View.OnClick
                 mContributorsListView.addHeaderView(mHeaderView);
                 mHeaderEditText.requestFocus();
                 imm.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0);
+                // Scroll to the edit text
+                mContributorsListView.smoothScrollToPosition(0);
                 mAddButton.setVisibility(View.GONE);
                 break;
 
